@@ -12,7 +12,7 @@ Installation
 Simply add this library to your project as a dependency:
 
 ```bash
-composer require kissge/elastica-friendly-result-set dev-master
+composer require kissge/elastica-friendly-result-set
 ```
 
 Usage
@@ -21,7 +21,7 @@ Usage
 ```php
 use Kissge\ElasticaFriendlyResultSet\Aggregations;
 
-$index = $container->get('fos_elastica.index.<index name>');
+$index = $container->get('fos_elastica.index.<index name>'); // Symfony assumed, but that's not necessary
 $aggs = new Aggregations($index->search($query)->getAggregations());
 
 foreach ($aggs-><aggregation name> as $key => $bucket) {
