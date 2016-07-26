@@ -1,0 +1,17 @@
+language: php
+
+php:
+    - 7.0
+    - 5.6
+    - 5.5
+
+before_script:
+    - composer dump-autoload
+    - composer install
+    - mkdir -p build/logs
+
+script:
+    - phpunit -c phpunit.xml test
+
+after_success:
+    - travis_retry vendor/bin/coveralls -v

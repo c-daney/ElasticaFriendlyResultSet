@@ -1,0 +1,26 @@
+{
+    "name": "kissge/elastica-friendly-result-set",
+    "description": "Wraps Elastica's ResultSet objects.",
+    "type": "library",
+    "require": {
+        "php": ">=5.5",
+        "ruflin/elastica": "*"
+    },
+    "require-dev": {
+        "satooshi/php-coveralls": "dev-master"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Yuto Kisuge",
+            "email": "mail@yo.eki.do",
+            "homepage": "http://yo.eki.do/"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Kissge\\ElasticaFriendlyResultSet\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Kissge\\ElasticaFriendlyResultSet\\Test\\": "test/" }
+    }
+}
