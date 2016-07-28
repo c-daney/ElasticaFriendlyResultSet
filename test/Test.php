@@ -227,4 +227,55 @@ class Test extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($averageScore, [12345, 67890]);
     }
+
+    /**
+     * @group functional
+     */
+    public function testArray()
+    {
+        $aggregations = new Aggregations([
+            'interval' => [
+                'buckets' => [
+                    [
+                        'key_as_string' => '2016-05-31T15:00:00.000Z',
+                        'key' => 1464706800000,
+                        'doc_count' => 1000,
+                        'editor' => [
+                            'doc_count_error_upper_bound' => 0,
+                            'sum_other_doc_count' => 0,
+                            'buckets' => [
+                                [
+                                    'key' => 'Emacs',
+                                    'doc_count' => 800,
+                                ],
+                                [
+                                    'key' => 'nano',
+                                    'doc_count' => 200,
+                                ],
+                            ],
+                        ],
+                    ],
+                    [
+                        'key_as_string' => '2016-06-30T15:00:00.000Z',
+                        'key' => 1467298800000,
+                        'doc_count' => 2000,
+                        'editor' => [
+                            'doc_count_error_upper_bound' => 0,
+                            'sum_other_doc_count' => 0,
+                            'buckets' => [
+                                [
+                                    'key' => 'SublimeText',
+                                    'doc_count' => 1800,
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        foreach ($aggregations->interval as $interval) {
+            $this->assertInternalType('array', $interval->editor);
+        }
+    }
 }
