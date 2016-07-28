@@ -190,4 +190,41 @@ class Test extends \PHPUnit_Framework_TestCase
             ],
         ]))->nonExistent;
     }
+
+    /**
+     * @group functional
+     */
+    public function testCall()
+    {
+        $aggregations = new Aggregations([
+            'interval' => [
+                'buckets' => [
+                    [
+                        'key_as_string' => '2016-06-12T15:00:00.000Z',
+                        'key' => 1465743600000,
+                        'doc_count' => 100,
+                        'averageScore' => [
+                            'value' => 12345,
+                        ],
+                    ],
+                    [
+                        'key_as_string' => '2016-06-13T15:00:00.000Z',
+                        'key' => 1465830000000,
+                        'doc_count' => 200,
+                        'averageScore' => [
+                            'value' => 67890,
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        $averageScore = [];
+
+        foreach ($aggregations->interval() as $key => $interval) {
+            $averageScore[] = $interval->averageScore();
+        }
+
+        $this->assertEquals($averageScore, [12345, 67890]);
+    }
 }
