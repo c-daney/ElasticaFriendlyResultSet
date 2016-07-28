@@ -23,22 +23,22 @@ class Aggregations
     }
 
     /**
-     * [Magic method] Returns a buckets object.
+     * [Magic method] Returns an array of bucket objects.
      *
      * @param string $name
-     * @return Buckets
+     * @return array
      */
     public function __get($name)
     {
-        return new Buckets($this->raw[$name]['buckets']);
+        return Bucket::convertToBucketArray($this->raw[$name]['buckets']);
     }
 
     /**
-     * [Magic method] Returns a buckets object.
+     * [Magic method] Returns an array of bucket objects.
      *
      * @param string $name
      * @param array  $arguments
-     * @return Buckets
+     * @return array
      */
     public function __call($name, array $arguments)
     {

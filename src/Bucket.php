@@ -56,7 +56,7 @@ class Bucket
                     }, $this->raw[$name]['buckets']);
                 } else {
                     // e.g. subaggregations
-                    return new Buckets($this->raw[$name]['buckets']);
+                    return self::convertToBucketArray($this->raw[$name]['buckets']);
                 }
             } else {
                 // e.g. sum of a field
@@ -77,6 +77,25 @@ class Bucket
     public function __call($name, array $arguments)
     {
         return $this->__get($name);
+    }
+
+    /**
+     * Converts a sequential array into an associative array of bucket objects.
+     *
+     * @param array $buckets
+     * @static
+     * @return array
+     */
+    public static function convertToBucketArray(array $buckets)
+    {
+        return array_combine(
+            array_map(function ($elem) {
+                return $elem['key'];
+            }, $buckets),
+            array_map(function ($elem) {
+                return new Bucket($elem);
+            }, $buckets)
+        );
     }
 
     /**
