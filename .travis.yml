@@ -6,7 +6,6 @@ php:
     - 5.5
 
 before_script:
-    - composer dump-autoload
     - composer install
     - mkdir -p build/logs
 
