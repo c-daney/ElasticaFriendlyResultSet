@@ -18,6 +18,8 @@ composer require kissge/elastica-friendly-result-set
 Usage
 -----
 
+Example 1.
+
 ```php
 use Kissge\ElasticaFriendlyResultSet\Aggregations;
 
@@ -28,6 +30,35 @@ foreach ($aggs-><aggregation name> as $key => $bucket) {
     do_something($bucket-><subaggregation name>);
     do_something($bucket-><subaggregation name>-><term name>);
 }
+```
+
+Example 2.
+
+```php
+use Kissge\ElasticaFriendlyResultSet\Aggregations;
+
+$aggs = new Aggregations($index->search($query)->getAggregations());
+$this->render($view, ['aggs' => $aggs]);
+```
+
+```twig
+{% for key, interval in aggs.interval %}
+    <tr>
+        <th>
+            {{ key }}
+        </th>
+
+        <td>
+            {{ interval.visitors.female }}
+        </td>
+        <td>
+            {{ interval.visitors.male }}
+        </td>
+        <td>
+            {{ interval.averageScore }}
+        </td>
+    </tr>
+{% endfor %}
 ```
 
 Author
