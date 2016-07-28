@@ -68,6 +68,18 @@ class Bucket
     }
 
     /**
+     * [Magic method] Returns something.
+     *
+     * @param string $name
+     * @param array  $arguments
+     * @return mixed
+     */
+    public function __call($name, array $arguments)
+    {
+        return $this->__get($name);
+    }
+
+    /**
      * Checks whether an array is associative.
      *
      * @param array $arr

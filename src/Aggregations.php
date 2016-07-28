@@ -32,4 +32,16 @@ class Aggregations
     {
         return new Buckets($this->raw[$name]['buckets']);
     }
+
+    /**
+     * [Magic method] Returns a buckets object.
+     *
+     * @param string $name
+     * @param array  $arguments
+     * @return Buckets
+     */
+    public function __call($name, array $arguments)
+    {
+        return $this->__get($name);
+    }
 }
